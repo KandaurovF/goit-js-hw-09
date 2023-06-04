@@ -33,3 +33,13 @@ img {
   flex-direction: column;
   padding-bottom: 10px;
 }
+
+.form {
+  display: flex;
+  gap: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+}
