@@ -11,6 +11,16 @@ const refs = {
   hoursField: document.querySelector('[data-hours]'),
   minutesField: document.querySelector('[data-minutes]'),
   secondsField: document.querySelector('[data-seconds]'),
+
+  enableStatrtBtn() {
+    this.startBtn.disabled = false;
+    this.startBtn.classList.add('isActive');
+  },
+
+  disableStatrtBtn() {
+    this.startBtn.disabled = true;
+    this.startBtn.classList.remove('isActive');
+  },
 };
 
 let timerId = null;
@@ -31,14 +41,12 @@ flatpickr(refs.dateTime, {
       });
       return;
     }
-    refs.startBtn.disabled = false;
-    refs.startBtn.classList.add('isActive');
+    refs.enableStatrtBtn();
 
     let countedTime = selectedDates[0].getTime() - Date.now();
 
     refs.startBtn.addEventListener('click', () => {
-      refs.startBtn.disabled = true;
-      refs.startBtn.classList.remove('isActive');
+      refs.disableStatrtBtn();
       refs.dateTime.disabled = true;
       startCountdown(countedTime);
     });
