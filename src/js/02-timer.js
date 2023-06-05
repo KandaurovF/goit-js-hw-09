@@ -35,17 +35,18 @@ flatpickr(refs.dateTime, {
     refs.startBtn.classList.add('isActive');
 
     let countedTime = selectedDates[0].getTime() - Date.now();
-    makeTextContent(countedTime);
 
     refs.startBtn.addEventListener('click', () => {
       refs.startBtn.disabled = true;
       refs.startBtn.classList.remove('isActive');
+      refs.dateTime.disabled = true;
       startCountdown(countedTime);
     });
   },
 });
 
 function startCountdown(ms) {
+  clearInterval(timerId);
   timerId = setInterval(() => {
     ms = ms - 1000;
 
@@ -56,6 +57,7 @@ function startCountdown(ms) {
       });
 
       clearInterval(timerId);
+      refs.dateTime.disabled = false;
       return;
     }
     makeTextContent(ms);

@@ -2,19 +2,22 @@ const body = document.querySelector('body');
 const startBtnEl = document.querySelector('button[data-start]');
 const stopBtnEl = document.querySelector('button[data-stop]');
 let timerId = null;
+stopBtnEl.disabled = true;
 
 startBtnEl.addEventListener('click', changeTheme);
 
 stopBtnEl.addEventListener('click', () => {
   clearInterval(timerId);
-  startBtnEl.removeAttribute('disabled');
+  startBtnEl.disabled = false;
+  stopBtnEl.disabled = true;
 });
 
 function changeTheme() {
+  startBtnEl.disabled = true;
+  stopBtnEl.disabled = false;
+
   timerId = setInterval(() => {
     body.style.backgroundColor = `${getRandomHexColor()}`;
-
-    startBtnEl.setAttribute('disabled', '');
   }, 1000);
 }
 
